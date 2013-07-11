@@ -21,6 +21,8 @@ This module has been tested on Ubuntu though it is intended to work on any Unix/
 ### Managing Keys
 
 <pre>
+  include ssh_keys
+
   ssh_keys::user{'foo':
     manage_ssh_dir => true,
   }
