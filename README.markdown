@@ -10,7 +10,7 @@ ssh authorized_keys functionality that the ssh_authorized_keys resource imposes.
 # Dependencies
 
 ## Required
-* [puppet-concat](https://github.com/ripienaar/puppet-concat)
+* [puppet-concat](http://forge.puppetlabs.com/puppetlabs/concat)
 
 # Quick Start
 
@@ -20,15 +20,15 @@ This module has been tested on Ubuntu though it is intended to work on any Unix/
 
 ### Managing Keys
 
-<pre>
-  include ssh_keys
+``` puppet
+include ssh_keys
 
-  ssh_keys::user{'foo':
-    manage_ssh_dir => true,
-  }
+ssh_keys::user{'foo':
+  manage_ssh_dir => true,
+}
   
-  ssh_keys::authorized_key{'foo-laptop':
-    key_line => 'ssh-rsa long-key-here foo@bar',
-    user     => 'foo',
-  }
-</pre>
+ssh_keys::authorized_key{'foo-laptop':
+  key_line => 'ssh-rsa long-key-here foo@bar',
+  user     => 'foo',
+}
+```
