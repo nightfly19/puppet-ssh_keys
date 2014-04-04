@@ -1,6 +1,5 @@
 define ssh_keys::user (
   $user           = $title,
-  $group          = $concat::setup::root_group, 
   $homedir        = "${ssh_keys::homedir_base}/${title}",
   $manage_ssh_dir = false
 ) {
@@ -15,7 +14,7 @@ define ssh_keys::user (
     file{$ssh_dir:
       ensure => directory,
       owner  => $user,
-      group  => $group,
+      group  => $::gid,
       mode   => '0700',
     }
   }  
@@ -25,7 +24,7 @@ define ssh_keys::user (
   concat{"ssh_keys::user::${user}":
     path  => $authorized_keys_file,
     owner => $user,
-    group => $group,
+    group => $::gid,
     mode  => '0600',
     require => $manage_ssh_dir ? {
       true    => [File["${ssh_dir}"]],
