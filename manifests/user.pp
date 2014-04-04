@@ -6,7 +6,10 @@ define ssh_keys::user (
 ) {
   include ssh_keys
 
-  $ssh_dir = "${homedir}/.ssh"
+  $ssh_dir = $user ? {
+        "root"  => "/root/.ssh",
+        default => "${homedir}/.ssh",
+  }
 
   if $manage_ssh_dir {
     file{$ssh_dir:
